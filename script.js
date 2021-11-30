@@ -49,8 +49,10 @@ const formSubmit = (event) =>{
 }
 
 const inputUpdate = (event) =>{
-  document.getElementById("inputValue").innerHTML = event.target.value;
-  /* csak akkor updatelje, ha az input value a name (getAttribute)*/
+  if (event.target.getAttribute("name") === "firstName"){
+    document.getElementById("inputValue").innerHTML = event.target.value;
+    /* csak akkor updatelje, ha az input value a name (getAttribute)*/
+  };
 }
 
 function loadEvent() {
@@ -62,8 +64,8 @@ function loadEvent() {
 
   const form = document.getElementById("form");
   form.addEventListener("submit", formSubmit);
+  
   const inputList = form.querySelectorAll("input");
-
   for (const input of inputList) {
     input.addEventListener("input", inputUpdate);
   };
