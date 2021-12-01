@@ -81,11 +81,14 @@ function loadEvent() {
   const root = document.getElementById("root");
   root.insertAdjacentHTML("afterbegin", formElement);
   root.insertAdjacentHTML("afterbegin", `
-    <div id="inputValue"></div>
+  <div id="inputValue"></div>
   `);
-
+  
   const form = document.getElementById("form");
   form.addEventListener("submit", formSubmit);
+  form.insertAdjacentHTML("afterbegin", `
+    <h3>w7 Form Template</h3>
+  `);
   
   const inputList = form.querySelectorAll("input");
   for (const input of inputList) {
