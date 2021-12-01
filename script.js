@@ -30,22 +30,42 @@ const inputElement = (type,name,title) =>{
     </div>
   `;
 };
+const selectElement = (type,name,title,options) =>{
+  let optionsToSelect = "";
+  for (const o of options) {
+    optionsToSelect += `
+    <option>${o}</option>;
+    `;
+  }
+  return `
+    <div>
+      <label>${title}</label>      
+      <${type} name="${name}">
+        ${optionsToSelect}
+      </${type}>
+    </div>
+  `;
+};
 
 const formElement = `
   <form id="form">
     ${inputElement("text","firstName","Keresztneved")}
     ${inputElement("file","profilePicture","Profilképed")}
     ${inputElement("email","personalEmail","Email címed")}
-    ${inputElement("radio","newsLetter","Hírlevelet szeretnél kapni")}
+    ${inputElement("checkbox","newsLetter","Hírlevelet szeretnél kapni")}
     ${inputElement("checkbox","terms","Elfogadom a felhasználási feltételeket")}
+    ${selectElement("select","where","Hol hallottál rólunk?", ["interneten","ismerőstől","egyéb"])}
     <button>Ok</button>
   </form>  
 `;
 
 const formSubmit = (event) =>{
   event.preventDefault();
-  console.log(event.target);
-  event.target.classList.add("submitted");
+  const et = event.target ;
+  console.log(et);
+  et.classList.add("submitted");
+  let selectValue = et.querySelector(`select[name="where"]`).value;
+  console.log(selectValue);
 }
 
 const inputUpdate = (event) =>{
@@ -53,6 +73,8 @@ const inputUpdate = (event) =>{
     document.getElementById("inputValue").innerHTML = event.target.value;
     /* csak akkor updatelje, ha az input value a name (getAttribute)*/
   };
+  console.log(event.target.parentNode.parentNode);
+  console.log(event.target.closest("#form"));
 }
 
 function loadEvent() {
