@@ -43,7 +43,7 @@ body{
   background-color: #edf5e1;
 }
 
-#form {
+#form, #form2 {
   width: 450px;
   height: 650px;
 
@@ -52,12 +52,17 @@ body{
   top: 50vh;
   transform: translate(-50%, -50%);
 
-  background-color: #5cdb95;
+  background-color: #5cdb95 ;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
   font-family: 'Cabin', sans-serif;
   color: #05386b;
 
   padding: 50px;
+}
+
+#form2{
+  left: 0;
+  transform: translate(0, -50%);
 }
 
 h3{
@@ -68,13 +73,13 @@ h3{
   font-size: 32px;
 }
 
-#form >div{
+#form >div, #form2 >div{
   margin-bottom: 25px;
 }
 
 label{
   display: block;
-  padding-bottom: 3px;
+  margin-bottom: 1px;
 }
 
 #form >div:nth-child(5) label, #form >div:nth-child(6) label, #form >div:nth-child(7) label {
@@ -106,7 +111,11 @@ button{
   margin-bottom: 35px;
 }
 
+
 #form >div:nth-child(2) input:focus, #form >div:nth-child(4) input:focus, #form >div:nth-child(7) select:focus{
   box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
+#form div.file{
+  position: relative;
+}

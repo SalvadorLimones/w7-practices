@@ -22,11 +22,11 @@ const functionName = (parameter1,parameter2) => {
 meghívás: functionName(1,2);
 
  */
-const inputElement = (type,name,title) =>{
+const inputElement = (type,name,title,req="") =>{
   return `
-    <div>
+    <div class="${type}">
       <label>${title}</label>      
-      <input type="${type}" name="${name}">
+      <input type="${type}" name="${name}" ${req}>
     </div>
   `;
 };
@@ -47,17 +47,88 @@ const selectElement = (type,name,title,options) =>{
   `;
 };
 
-const formElement = `
+const nameData = {
+  type: "text",
+  name: "firstName",
+  label: "Keresztneved",
+};
+
+const anotherFormFields = [
+  {
+    type: "text",
+    name: "street",
+    label: "Közterület neve",
+  },
+  {
+    type: "number",
+    name: "houseNumber",
+    label: "Házszám",
+  },
+  {
+    type: "number",
+    name: "zipCode",
+    label: "Irányítószám",
+  },
+  {
+    type: "text",
+    name: "city",
+    label: "Település neve",
+  }
+]
+
+const formFields = [
+  {
+    type: "text",
+    name: "firstName",
+    label: "Keresztneved",
+  },
+  {
+    type: "file",
+    name: "profilePicture",
+    label: "Profilképed",
+  }, 
+  {
+    type: "email",
+    name: "personalEmail",
+    label: "Email címed",
+    req: "required",
+  },
+  {
+    type: "checkbox",
+    name: "newsLetter",
+    label: "Hírlevelet szeretnék kapni",
+  },
+  {
+    type: "checkbox",
+    name: "terms",
+    label: "Elfogadom a felhasználási feltételeket",
+  },
+]
+
+const formElement = (ffs,id) =>{
+  let inputs = "";
+  for (const ff of ffs) {
+    inputs+=inputElement(ff.type,ff.name,ff.label,ff.req);   
+  }
+  return `
+  <form id="${id}">
+    ${inputs}
+    ${selectElement("select","where","Hol hallottál rólunk?", ["interneten","ismerőstől","egyéb"])}
+  <button>Ok</button>
+</form> `
+}
+
+/* const formElement = `
   <form id="form">
-    ${inputElement("text","firstName","Keresztneved")}
+    ${inputElement(nameData.type,nameData.name,nameData.label)}
     ${inputElement("file","profilePicture","Profilképed")}
-    ${inputElement("email","personalEmail","Email címed")}
+    ${inputElement("email","personalEmail","Email címed","required")}
     ${inputElement("checkbox","newsLetter","Hírlevelet szeretnél kapni")}
     ${inputElement("checkbox","terms","Elfogadom a felhasználási feltételeket")}
     ${selectElement("select","where","Hol hallottál rólunk?", ["interneten","ismerőstől","egyéb"])}
     <button>Ok</button>
   </form>  
-`;
+`; */
 
 const formSubmit = (event) =>{
   event.preventDefault();
@@ -79,7 +150,8 @@ const inputUpdate = (event) =>{
 
 function loadEvent() {
   const root = document.getElementById("root");
-  root.insertAdjacentHTML("afterbegin", formElement);
+  root.insertAdjacentHTML("afterbegin", formElement(formFields,"form"));
+  root.insertAdjacentHTML("afterbegin", formElement(anotherFormFields,"form2"));
   root.insertAdjacentHTML("afterbegin", `
   <div id="inputValue"></div>
   `);
