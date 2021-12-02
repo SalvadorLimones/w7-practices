@@ -144,6 +144,13 @@ const inputUpdate = (event) =>{
     document.getElementById("inputValue").innerHTML = event.target.value;
     /* csak akkor updatelje, ha az input value a name (getAttribute)*/
   };
+  if (event.target.getAttribute("name") === "profilePicture"){
+    console.log(event.target.files[0]);
+    const image = URL.createObjectURL(event.target.files[0]);
+    document.getElementById("inputValue").insertAdjacentHTML("beforeend",`
+    <img src="${image}">
+    `);
+  };  
   console.log(event.target.parentNode.parentNode);
   console.log(event.target.closest("#form"));
 }
